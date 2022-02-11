@@ -1,0 +1,77 @@
+"reinit"
+
+"set background 1"
+
+'!cdo -r -sub -selvar,SAO  /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_ocean.nc -selvar,SAO /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sss.nc' 
+
+"sdfopen sss.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set mproj latlon"
+"set lat -90 90"
+"set lon -180 180"
+"set lev 0.06"
+"set xlopts 1 4 0.2"
+"set ylopts 1 4 0.16"
+"color -7 7 0.4 -kind indigo->darkmagenta->blueviolet->blue->dodgerblue->lightblue->snow->yellow->gold->darkorange->orangered->red->darkred"
+"set gxout shaded"
+"d SAO"
+"run xcbar 0.5 10.5 0.3 0.5 -edge triangle -line -fs 5 -line off"
+
+"close 1"
+
+'!cdo -r setmisstoc,1 -setrtoc,-1000000,100000000,0 -selvar,zmld /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sss_2.nc'
+
+"sdfopen sss_2.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set xlab off"
+"set ylab off"
+"set mproj latlon"
+"set lon -180 180"
+"set lat -90 90"
+"set gxout contour"
+"set ccolor 1"
+"set cthick 12"
+"draw title 560-1120ppm"
+"set clevs 0.5"
+"set clab off"
+
+
+"d zmld"
+
+*WIS rectangular plot
+'q w2xy -75 35'  
+xpos1=subwrd(result,3)
+ypos1=subwrd(result,6)
+'q w2xy -48 70'
+xpos2=subwrd(result,3)
+ypos2=subwrd(result,6)
+'set line 3 1 6'
+'draw rec 'xpos1' 'ypos1' 'xpos2' 'ypos2
+
+*EU rectangular plot
+'q w2xy 0 47'  
+xpos1=subwrd(result,3)
+ypos1=subwrd(result,6)
+'q w2xy 80 66'
+xpos2=subwrd(result,3)
+ypos2=subwrd(result,6)
+'set line 3 1 6'
+'draw rec 'xpos1' 'ypos1' 'xpos2' 'ypos2
+
+
+"close 1"
+
+
+'gxprint PI_SST_abs.eps'
+
+'!eps2eps PI_SST_abs.eps 560-1120ppm_rect.ps'
+'!convert -flatten PI_SST_abs.eps -rotate 90 560-1120ppm_rect.png'
+'!ps2pdf -dEPSCrop 560-1120ppm_rect.ps'
+'!mv 560-1120ppm_rect.pdf plots/'
+'!mv *ps *png plots'
+'!rm PI_SST_abs* sss*.nc'
+

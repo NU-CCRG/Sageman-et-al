@@ -1,0 +1,135 @@
+levels='6 17 27 37 47 57 69 83 100 123 150 183 220 263 310 363 420 485 560 645'
+
+
+"reinit"
+
+i=1
+
+"set background 1"
+
+'!cdo mrotuvb -setgrid,GR30u.nc -selvar,UKO /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_uko_vke.nc -setgrid,GR30v.nc -selvar,VKE /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_uko_vke.nc uko_vke_nswe.nc'
+'!cdo -t mpiom1 -f nc setgrid,GR30s.nc -setgrid,r122x101 -setctomiss,0 uko_vke_nswe.nc mpiom_output_r122x101.nc'
+'!cdo -r remapcon,r360x180 mpiom_output_r122x101.nc ukovke_nswe_r360x180.nc'
+
+'!cdo -r selvar,SAO /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sao.nc'
+'!cdo -r merge -invertlev ukovke_nswe_r360x180.nc sao.nc uko_vke_sao.nc'
+
+
+"sdfopen uko_vke_sao.nc"
+"set mpdraw off"
+"set grads off"
+"set mproj latlon"
+"set grid off"
+"set lon -90 0"
+"set lat 20 85"
+"set lev 0.06"
+"color 8 36 2 -kind indigo->darkmagenta->blueviolet->blue->dodgerblue->turquoise->mediumseagreen->yellowgreen->gold->darkorange->orangered->red->darkred"
+"set gxout vector"
+"set cthick 3"
+"set arrscl 0.15 0.04"
+"set arrlab on"
+"d skip(UKO,2,2);VKE;SAO"
+"run xcbar 10 10.2 0.7 7.8 -edge triangle -line -fs 1 -line off"
+
+"close 1"
+
+'!cdo -r setmisstoc,1 -setrtoc,-10000000,10000000,0 -selvar,zmld /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sss.nc'
+
+"sdfopen sss.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set xlab off"
+"set ylab off"
+"set mproj latlon"
+"set lon -90 0"
+"set lat 20 85"
+"set gxout contour"
+"draw title 1120ppm"
+"set ccols 1"
+"set cthick 10"
+"set clevs 0.5"
+"set clab off"
+
+"d zmld"
+
+"close 1"
+
+
+'gxprint PI_SST_abs.eps'
+
+'!eps2eps PI_SST_abs.eps 1120ppm.ps'
+'!convert -flatten PI_SST_abs.eps -rotate 90 1120ppm.png'
+'!ps2pdf -dEPSCrop 1120ppm.ps'
+'!mv 1120ppm.pdf plots/'
+'!mv *.ps *png plots'
+'!rm PI_SST_abs* uko*.nc mpiom_output_r122x101.nc sss.nc sao.nc *pdf'
+
+
+*"-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+"reinit"
+
+i=1
+
+"set background 1"
+
+'!cdo mrotuvb -setgrid,GR30u.nc -selvar,UKO /media/igor/hdd/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_uko_vke_timmean.nc -setgrid,GR30v.nc -selvar,VKE /media/igor/hdd/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_uko_vke_timmean.nc uko_vke_nswe.nc'
+'!cdo -t mpiom1 -f nc setgrid,GR30s.nc -setgrid,r122x101 -setctomiss,0 uko_vke_nswe.nc mpiom_output_r122x101.nc'
+'!cdo -r remapcon,r360x180 mpiom_output_r122x101.nc ukovke_nswe_r360x180.nc'
+
+"!cdo -r selvar,SAO /media/igor/hdd/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_ocean.nc sao.nc"
+"!cdo -r merge -invertlev ukovke_nswe_r360x180.nc sao.nc uko_vke_sao.nc"
+
+
+"sdfopen uko_vke_sao.nc"
+"set mpdraw off"
+"set grads off"
+"set mproj latlon"
+"set grid off"
+"set lon -90 0"
+"set lat 20 85"
+"set lev 0.06"
+"color 8 36 2 -kind indigo->darkmagenta->blueviolet->blue->dodgerblue->turquoise->mediumseagreen->yellowgreen->gold->darkorange->orangered->red->darkred"
+"set gxout vector"
+"set cthick 3"
+"set arrscl 0.15 0.04"
+"set arrlab on"
+"d skip(UKO,2,2);VKE;SAO"
+"run xcbar 10 10.2 0.7 7.8 -edge triangle -line -fs 1 -line off"
+
+"close 1"
+
+'!cdo -r setmisstoc,1 -setrtoc,-10000000,10000000,0 -selvar,zmld /media/igor/hdd/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_ocean.nc sss.nc'
+
+"sdfopen sss.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set xlab off"
+"set ylab off"
+"set mproj latlon"
+"set lon -90 0"
+"set lat 20 85"
+"set gxout contour"
+"draw title 560ppm"
+"set ccols 1"
+"set cthick 10"
+"set clevs 0.5"
+"set clab off"
+
+"d zmld"
+
+"close 1"
+
+
+'gxprint PI_SST_abs.eps'
+
+'!eps2eps PI_SST_abs.eps 560ppm.ps'
+'!convert -flatten PI_SST_abs.eps -rotate 90 560ppm.png'
+'!ps2pdf -dEPSCrop 560ppm.ps'
+'!mv 560ppm.pdf plots/'
+'!mv *.ps *png plots'
+'!rm PI_SST_abs* mpiom_output_r122x101.nc uko*.nc sao.nc sss.nc *pdf'
+
