@@ -1,0 +1,294 @@
+"reinit"
+
+"set background 1"
+
+'!cdo -r -remapcon,r360x180 -mulc,31536 -add -selvar,precip /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_atm.nc -selvar,evap /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_atm.nc sss.nc' 
+
+"sdfopen sss.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set mproj latlon"
+"set lat -90 90"
+"set lon -180 180"
+"set xlopts 1 4 0.2"
+"set ylopts 1 4 0.16"
+"set xlint 180"
+"set ylint 90"
+"color -3.5 3.5 0.1 -kind indigo->darkmagenta->blueviolet->blue->dodgerblue->aquamarine->lightgreen->lawngreen->greenyellow->yellow->gold->darkorange->orangered->red->darkred"
+"set gxout shaded"
+"d precip"
+"run xcbar 0.5 10.5 0.3 0.5 -edge triangle -line -fs 5 -line off"
+
+"close 1"
+
+'!cdo -r setmisstoc,1 -setrtoc,-1000000,100000000,0 -selvar,zmld /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sss_2.nc'
+
+"sdfopen sss_2.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set xlab off"
+"set ylab off"
+"set mproj latlon"
+"set lon -180 180"
+"set lat -90 90"
+"set gxout contour"
+"set ccolor 1"
+"set cthick 12"
+"draw title 1120ppm"
+"set clevs 0.5"
+"set clab off"
+
+"d zmld"
+
+"close 1"
+
+'gxprint PI_SST_abs.eps'
+
+'!eps2eps PI_SST_abs.eps 1120ppm.ps'
+'!convert -flatten PI_SST_abs.eps -rotate 90 1120ppm.png'
+'!ps2pdf -dEPSCrop 1120ppm.ps'
+'!mv 1120ppm.pdf plots/P-E_1120ppm.pdf'
+'!mv *ps *png plots'
+'!rm PI_SST_abs* sss*.nc *pdf'
+
+*"---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+"reinit"
+
+"set background 1"
+
+'!cdo -r -remapcon,r360x180 -mulc,31536 -add -selvar,precip /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_3xCO2/reduced_sol_3xCO2_atm.nc -selvar,evap /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_3xCO2/reduced_sol_3xCO2_atm.nc sss.nc'
+
+"sdfopen sss.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set mproj latlon"
+"set lat -90 90"
+"set lon -180 180"
+"set xlopts 1 4 0.2"
+"set ylopts 1 4 0.16"
+"set xlint 180"
+"set ylint 90"
+"color -3.5 3.5 0.1 -kind indigo->darkmagenta->blueviolet->blue->dodgerblue->aquamarine->lightgreen->lawngreen->greenyellow->yellow->gold->darkorange->orangered->red->darkred"
+"set gxout shaded"
+"d precip"
+"run xcbar 0.5 10.5 0.3 0.5 -edge triangle -line -fs 5 -line off"
+
+"close 1"
+
+'!cdo -r setmisstoc,1 -setrtoc,-1000000,100000000,0 -selvar,zmld /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sss_2.nc'
+
+"sdfopen sss_2.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set xlab off"
+"set ylab off"
+"set mproj latlon"
+"set lon -180 180"
+"set lat -90 90"
+"set gxout contour"
+"set ccolor 1"
+"set cthick 12"
+"draw title 840ppm"
+"set clevs 0.5"
+"set clab off"
+
+"d zmld"
+
+"close 1"
+
+'gxprint PI_SST_abs.eps'
+
+'!eps2eps PI_SST_abs.eps 840ppm.ps'
+'!convert -flatten PI_SST_abs.eps -rotate 90 840ppm.png'
+'!ps2pdf -dEPSCrop 840ppm.ps'
+'!mv 840ppm.pdf plots/P-E_840ppm.pdf'
+'!mv *ps *png plots'
+'!rm PI_SST_abs* sss*.nc *pdf'
+
+*"--------------------------------------------------------------------------------------------------------------------------------------------------"
+
+"reinit"
+
+"set background 1"
+
+'!cdo -r -remapcon,r360x180 -mulc,31536 -sub -add -selvar,precip /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_3xCO2/reduced_sol_3xCO2_atm.nc -selvar,evap /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_3xCO2/reduced_sol_3xCO2_atm.nc -add -selvar,precip /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_atm.nc -selvar,evap /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_atm.nc sss.nc' 
+
+"sdfopen sss.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set mproj latlon"
+"set lat -90 90"
+"set lon -180 180"
+"set xlopts 1 4 0.2"
+"set ylopts 1 4 0.16"
+"set xlint 180"
+"set ylint 90"
+"color -2.2 2.2 0.4  -kind indigo->darkmagenta->blueviolet->blue->dodgerblue->lightblue->snow->yellow->gold->darkorange->orangered->red->darkred"
+"set gxout shaded"
+"d precip"
+"run xcbar 0.5 10.5 0.3 0.5 -edge triangle -line -line off"
+
+
+"close 1"
+
+'!cdo -r setmisstoc,1 -setrtoc,-1000000,100000000,0 -selvar,zmld /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sss_2.nc'
+
+"sdfopen sss_2.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set xlab off"
+"set ylab off"
+"set mproj latlon"
+"set lon -180 180"
+"set lat -90 90"
+"set gxout contour"
+"set ccolor 1"
+"set cthick 12"
+"draw title 840-1120ppm"
+"set clevs 0.5"
+"set clab off"
+
+"d zmld"
+
+"close 1"
+
+'gxprint PI_SST_abs.eps'
+
+'!eps2eps PI_SST_abs.eps 840ppm-1120ppm.ps'
+'!convert -flatten PI_SST_abs.eps -rotate 90 840ppm-1120ppm.png'
+'!ps2pdf -dEPSCrop 840ppm-1120ppm.ps'
+'!mv 840ppm-1120ppm.pdf plots/P-E_840ppm-1120ppm.pdf'
+'!mv *ps *png plots'
+'!rm PI_SST_abs* sss*.nc'
+
+*"--------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+"reinit"
+
+"set background 1"
+
+'!cdo -r -remapcon,r360x180 -mulc,31536 -add -selvar,precip /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_atm.nc -selvar,evap /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_atm.nc sss.nc' 
+
+"sdfopen sss.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set mproj latlon"
+"set lat -90 90"
+"set lon -180 180"
+"set xlopts 1 4 0.2"
+"set ylopts 1 4 0.16"
+"set xlint 180"
+"set ylint 90"
+"color -3.5 3.5 0.1 -kind indigo->darkmagenta->blueviolet->blue->dodgerblue->aquamarine->lightgreen->lawngreen->greenyellow->yellow->gold->darkorange->orangered->red->darkred"
+"set gxout shaded"
+"d precip"
+"set strsiz 0.3"
+"run xcbar 0.5 10.5 0.3 0.5 -edge triangle -line -fs 5 -line off"
+
+"close 1"
+
+'!cdo -r setmisstoc,1 -setrtoc,-1000000,100000000,0 -selvar,zmld /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sss_2.nc'
+
+"sdfopen sss_2.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set xlab off"
+"set ylab off"
+"set mproj latlon"
+"set lon -180 180"
+"set lat -90 90"
+"set gxout contour"
+"set ccolor 1"
+"set cthick 12"
+"draw title 560ppm"
+"set clevs 0.5"
+"set clab off"
+
+"d zmld"
+
+"close 1"
+
+'gxprint PI_SST_abs.eps'
+
+'!eps2eps PI_SST_abs.eps 560ppm.ps'
+'!convert -flatten PI_SST_abs.eps -rotate 90 560ppm.png'
+'!ps2pdf -dEPSCrop 560ppm.ps'
+'!mv 560ppm.pdf plots/P-E_560ppm.pdf'
+'!mv *ps *png plots'
+'!rm PI_SST_abs* sss*.nc'
+
+*"--------------------------------------------------------------------------------------------------------------------------------------------------"
+
+"reinit"
+
+"set background 1"
+
+'!cdo -r -remapcon,r360x180 -mulc,31536 -sub -add -selvar,precip /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_atm.nc -selvar,evap /home/igor/Pulpit/correct_albedo/reduced/reduced_sol_2xCO2/brand_new_lsm/reduced_sol_2xCO2_atm.nc -add -selvar,precip /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_atm.nc -selvar,evap /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_atm.nc sss.nc' 
+
+"sdfopen sss.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set mproj latlon"
+"set lat -90 90"
+"set lon -180 180"
+"set xlopts 1 4 0.2"
+"set ylopts 1 4 0.16"
+"set xlint 180"
+"set ylint 90"
+"color -2.2 2.2 0.4  -kind indigo->darkmagenta->blueviolet->blue->dodgerblue->lightblue->snow->yellow->gold->darkorange->orangered->red->darkred"
+"set gxout shaded"
+"d precip"
+"run xcbar 0.5 10.5 0.3 0.5 -edge triangle -line -line off"
+
+"close 1"
+
+'!cdo -r setmisstoc,1 -setrtoc,-1000000,100000000,0 -selvar,zmld /home/igor/Pulpit/correct_albedo/kreda/init_test/4900-5000/init_test_ocean.nc sss_2.nc'
+
+"sdfopen sss_2.nc"
+"set mpdraw off"
+"set grads off"
+"set grid off"
+"set xlab off"
+"set ylab off"
+"set mproj latlon"
+"set lon -180 180"
+"set lat -90 90"
+"set gxout contour"
+"set ccolor 1"
+"set cthick 12"
+"draw title 560-1120ppm"
+"set clevs 0.5"
+"set clab off"
+
+"d zmld"
+
+"close 1"
+
+'gxprint PI_SST_abs.eps'
+
+'!eps2eps PI_SST_abs.eps 560ppm-1120ppm.ps'
+'!convert -flatten PI_SST_abs.eps -rotate 90 560ppm-1120ppm.png'
+'!ps2pdf -dEPSCrop 560ppm-1120ppm.ps'
+'!mv 560ppm-1120ppm.pdf plots/P-E_560ppm-1120ppm.pdf'
+'!mv *ps *png plots'
+'!rm PI_SST_abs* sss*.nc'
+
+*"--------------------------------------------------------------------------------------------------------------------------------------------------"
+
+
+'!montage -trim -tile 2x3 plots/1120ppm.png null: plots/840ppm.png plots/1120ppm-840ppm.png plots/560ppm.png plots/1120ppm-560ppm.png -geometry +20+20 P-E_global.png'
+'!eog P-E_global.png'
+'!mv P-E_global.png plots'
+'!rm *.png *jpg'
